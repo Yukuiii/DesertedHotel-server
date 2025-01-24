@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  nacos:
+    image: nacos/nacos-server
+    container_name: nacos
+    environment:
+      - MODE=standalone
+    ports:
+      - "8848:8848"
+
+  de-gateway:
+    build: ./de-gateway
+    container_name: de-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nacos
+    environment:
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=nacos:8848
+
+  de-auth:
+    build: ./de-auth
+    container_name: de-auth
+    ports:
+      - "8000:8000"
+    depends_on:
+      - nacos
+    environment:
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=nacos:8848 

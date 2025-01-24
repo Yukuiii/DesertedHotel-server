@@ -1,0 +1,70 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: de-auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/desert_hotel_springcloud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 15
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  boot:
+    admin:
+      client:
+        url: http://localhost:8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always #显示健康的详细信息
+    env:
+      show-values: always #默认Actuator的环境变量会以****显示，这里开启显示
+    configprops:
+      show-values: always #默认Actuator的配置属性会以****显示，这里开启显示
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html         # Swagger UI的访问路径，可以通过 http://服务地址:端口/swagger-ui.html 访问
+    enabled: true                  # 是否启用Swagger UI界面
+    tags-sorter: alpha            # API标签的排序方式，alpha表示按字母顺序排序
+    operations-sorter: alpha      # API操作的排序方式，alpha表示按字母顺序排序
+    show-extensions: true         # 显示Swagger的扩展信息
+  api-docs:
+    path: /v3/api-docs           # OpenAPI文档的访问路径，用于其他工具获取API文档
+    enabled: true                # 是否启用API文档生成
+  group-configs:
+    - group: 'default'           # API文档分组名称
+      packages-to-scan: com.yukuii.desertedhotel.auth.admin.controller, com.yukuii.desertedhotel.auth.front.controller  # 指定要扫描的包路径，生成API文档
+  default-flat-param-object: false  # 是否将参数对象展开，false表示保持对象层级结构，true表示将参数对象展开成属性
+
+mybatis-plus:
+  # Mapper XML文件的位置
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    # 开启驼峰命名转换,如table_field -> tableField
+    map-underscore-to-camel-case: true
+    # SQL日志输出实现类,用于打印SQL语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

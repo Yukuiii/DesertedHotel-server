@@ -1,0 +1,39 @@
+# 服务器配置
+server:
+  port: 8080  # 网关服务端口号
+
+# Spring相关配置
+spring:
+  application:
+    name: de-gateway  # 服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  # Nacos服务注册中心地址
+        namespace: public
+        group: DEFAULT_GROUP
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:  # 路由规则配置
+        - id: auth_route  # 路由ID，保持唯一
+          uri: lb://de-auth  # 目标服务地址，lb表示使用负载均衡策略访问服务，de-auth是目标服务名
+          predicates:  # 断言（判断条件）
+            - Path=/auth/**  # 匹配请求路径，/auth/**表示以/auth开头的所有请求 
+          filters:  # 过滤器
+            - StripPrefix=1  # 去除请求路径的第一级，如/auth/login -> /login
+
+# Actuator监控端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # 暴露所有监控端点，包括health、info、metrics等
+  endpoint:
+    health:
+      show-details: always  # 显示详细的健康检查信息
+    env:
+      show-values: always  # 显示环境变量的实际值，而不是****
+    configprops:
+      show-values: always  # 显示配置属性的实际值，而不是**** 
