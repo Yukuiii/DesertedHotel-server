@@ -1,6 +1,7 @@
 package com.yukuii.desertedhotel.common.pojo;
 
 import com.yukuii.desertedhotel.common. enums.ResultCode;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -50,7 +51,22 @@ public class CommonResult<T> {
      * @param <T> 数据泛型
      * @return 通用返回结果
      */
-    public static <T> CommonResult<T> error(Integer code, String message) {
+    public static <T> CommonResult<T> error(String message) {
         return new CommonResult<>(ResultCode.SYSTEM_ERROR.getCode(), message, null);
     }
+
+
+
+
+    /**
+     * 失败返回结果
+     * @param code 错误码
+     * @param message 错误信息
+     * @param <T> 数据泛型
+     * @return 通用返回结果
+     */
+    public static <T> CommonResult<T> error(Integer code, String message) {
+        return new CommonResult<>(code, message, null);
+    }
+
 }

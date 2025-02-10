@@ -51,6 +51,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+        <!-- 公共包 -->
+        <dependency>
+            <groupId>top.yukuii</groupId>
+            <artifactId>de-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

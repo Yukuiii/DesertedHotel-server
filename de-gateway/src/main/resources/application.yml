@@ -23,6 +23,23 @@ spring:
             - Path=/auth/**  # 匹配请求路径，/auth/**表示以/auth开头的所有请求 
           filters:  # 过滤器
             - StripPrefix=1  # 去除请求路径的第一级，如/auth/login -> /login
+        - id: user_route
+          uri: lb://de-user
+          predicates:
+            - Path=/user/**
+  # Redis配置
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 
+      database: 1
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
 
 # Actuator监控端点配置
 management:
@@ -37,3 +54,23 @@ management:
       show-values: always  # 显示环境变量的实际值，而不是****
     configprops:
       show-values: always  # 显示配置属性的实际值，而不是**** 
+
+
+# Sa-Token配置
+sa-token:
+  # token名称
+  token-name: Authorization
+  # token前缀
+  token-prefix: Bearer
+  # token有效期
+  timeout: 2592000
+  # 是否允许同一账号并发登录
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token
+  is-share: false
+  # token风格
+  token-style: random-64
+  # 是否输出操作日志
+  is-log: false 
+
+

@@ -12,11 +12,11 @@ import reactor.core.publisher.Mono;
 
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
-
+import com.yukuii.desertedhotel.common.exception.UnauthorizedException;
+import cn.dev33.satoken.exception.NotLoginException;
 
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
-
 
     // 白名单路径
     private static final List<String> WHITE_LIST = List.of(
@@ -25,8 +25,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             "/doc.html",
             "/webjars/**",
             "/swagger-resources/**",
-            "/v3/api-docs/**"
-    );
+            "/v3/api-docs/**");
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -38,20 +37,24 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
 
         // 检查是否登录
-        SaRouter.match("/**")
-            .check(r -> StpUtil.checkLogin());
-            
+        try {
+            SaRouter.match("/**")
+                    .check(r -> StpUtil.checkLogin());
+        } catch (NotLoginException e) {
+            throw new UnauthorizedException(e.getMessage());
+        }
+
         return chain.filter(exchange);
 
     }
 
     // 判断是否是白名单路径
     private boolean isWhitePath(String path) {
-        return WHITE_LIST.stream().anyMatch(pattern -> 
-            path.startsWith(pattern) || path.matches(pattern.replace("/**", "/.*")));
+        return WHITE_LIST.stream()
+                .anyMatch(pattern -> path.startsWith(pattern) || path.matches(pattern.replace("/**", "/.*")));
     }
 
-    //设置优先级
+    // 设置优先级
     @Override
     public int getOrder() {
         return -100;

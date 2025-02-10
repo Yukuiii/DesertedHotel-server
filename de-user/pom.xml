@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-          <groupId>top.yukuii</groupId>
-          <artifactId>DesertedHotel-server</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+        <groupId>top.yukuii</groupId>
+        <artifactId>DesertedHotel-server</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>de-auth</artifactId>
+    <artifactId>de-user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
@@ -26,6 +26,7 @@
         </dependency>
         <!-- 公共模块 -->
         <dependency>
+
             <groupId>top.yukuii</groupId>
             <artifactId>de-common</artifactId>
         </dependency>
@@ -39,36 +40,10 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-        <!-- 解析UserAgent -->
-        <dependency>    
-            <groupId>eu.bitwalker</groupId>
-            <artifactId>UserAgentUtils</artifactId>
-        </dependency>
-        <!-- Servlet API -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <!-- Sa-Token -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
-        </dependency>
-        <!-- Sa-Token 集成redis -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-redis-jackson</artifactId>
-        </dependency>
-        <!-- Knife4j API文档生产工具 -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-        </dependency>
         <!-- OpenFeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
-
-</project>
+</project> 

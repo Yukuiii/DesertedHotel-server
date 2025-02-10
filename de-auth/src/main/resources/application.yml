@@ -32,6 +32,19 @@ spring:
     admin:
       client:
         url: http://localhost:8001
+  # Redis配置
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 
+      database: 1
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
 management:
   endpoints:
     web:
@@ -68,3 +81,19 @@ mybatis-plus:
     # SQL日志输出实现类,用于打印SQL语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+# Sa-Token配置
+sa-token:
+  # token名称
+  token-name: Authorization
+  # token前缀
+  token-prefix: Bearer
+  # token有效期
+  timeout: 2592000
+  # 是否允许同一账号并发登录
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token
+  is-share: false
+  # token风格
+  token-style: random-64
+  # 是否输出操作日志
+  is-log: false 

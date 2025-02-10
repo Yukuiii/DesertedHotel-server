@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>top.yukuii</groupId>
@@ -16,6 +16,8 @@
         <module>de-common</module>
         <module>de-auth</module>
         <module>de-gateway</module>
+        <module>de-user</module>
+        <module>de-api</module>
     </modules>
     <name>DesertedHotel-server</name>
     <description>智慧无人酒店服务端</description>
@@ -36,6 +38,7 @@
         <servlet-api.version>4.0.1</servlet-api.version>
         <ua-parser.version>1.21</ua-parser.version>
         <de-common.version>0.0.1-SNAPSHOT</de-common.version>
+        <de-api.version>0.0.1-SNAPSHOT</de-api.version>
     </properties>
 
     <dependencies>
@@ -164,6 +167,13 @@
                 <artifactId>de-common</artifactId>
                 <version>${de-common.version}</version>
             </dependency>
+            <!-- API模块 -->
+            <dependency>
+                <groupId>top.yukuii</groupId>
+                <artifactId>de-api</artifactId>
+                <version>${de-api.version}</version>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
 

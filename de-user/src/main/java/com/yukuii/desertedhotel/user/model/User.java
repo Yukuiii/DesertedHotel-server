@@ -1,4 +1,4 @@
-package com.yukuii.desertedhotel.auth.admin.model;
+package com.yukuii.desertedhotel.user.model;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,14 +10,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("user") 
+@TableName("user")
+@Schema(description = "用户实体")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // ================= 核心字段 =================
-    @TableId(value = "id", type = IdType.ASSIGN_UUID) // 主键策略
+    @TableId(type = IdType.AUTO)
     @Schema(description = "用户ID")
-    private String id;
+    private Long id;
 
     @TableField(value = "username", condition = SqlCondition.EQUAL)
     @Schema(description = "用户名")

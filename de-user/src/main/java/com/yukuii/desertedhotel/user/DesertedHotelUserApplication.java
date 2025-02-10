@@ -1,13 +1,13 @@
-package com.yukuii.desertedhotel.auth;
+package com.yukuii.desertedhotel.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = "com.yukuii.desertedhotel.api")
+@EnableFeignClients
 @SpringBootApplication
-public class DesertedHotelAuthApplication {
+public class DesertedHotelUserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DesertedHotelAuthApplication.class, args);
+        SpringApplication.run(DesertedHotelUserApplication.class, args);
     }
-}
+} 
