@@ -26,7 +26,6 @@
         </dependency>
         <!-- 公共模块 -->
         <dependency>
-
             <groupId>top.yukuii</groupId>
             <artifactId>de-common</artifactId>
         </dependency>

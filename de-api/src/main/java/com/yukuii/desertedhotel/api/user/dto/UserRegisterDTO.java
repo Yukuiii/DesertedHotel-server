@@ -1,4 +1,4 @@
-package com.yukuii.desertedhotel.user.dto;
+package com.yukuii.desertedhotel.api.user.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -30,4 +30,8 @@ public class UserRegisterDTO {
     @Email(message = "邮箱格式不正确")
     @Schema(description = "邮箱")
     private String email;
+
+    @NotBlank(message = "验证码不能为空")
+    @Schema(description = "验证码")
+    private String code;
 } 

@@ -27,6 +27,8 @@ spring:
           uri: lb://de-user
           predicates:
             - Path=/user/**
+          filters:
+            - StripPrefix=1
   # Redis配置
   data:
     redis:

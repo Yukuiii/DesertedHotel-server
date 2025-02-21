@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: de-user
+  main:
+    web-application-type: reactive
+      
   cloud:
     nacos:
       discovery:
@@ -13,9 +16,24 @@ spring:
     url: jdbc:mysql://localhost:3306/deserted_hotel?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
+  mail:
+    host: smtp.example.com # 邮件服务器地址
+    port: 465
+    username: your-email@example.com
+    password: your-email-password
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

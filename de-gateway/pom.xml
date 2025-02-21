@@ -55,6 +55,24 @@
         <dependency>
             <groupId>top.yukuii</groupId>
             <artifactId>de-common</artifactId>
+            <exclusions>
+                <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+                <exclusion>
+                   <groupId>mysql</groupId>
+                 <artifactId>mysql-connector-java</artifactId>
+                </exclusion>
+                <exclusion>
+                     <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                        <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

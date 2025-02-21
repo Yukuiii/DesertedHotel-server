@@ -59,8 +59,8 @@ public interface UserFeignClient {
     @PutMapping("/status/{id}/{status}")
     @Operation(summary = "更新用户状态")
     CommonResult<Boolean> updateUserStatus(
-        @Parameter(description = "用户ID") @PathVariable("id") Long id,
-        @Parameter(description = "状态(1:正常,0:禁用)") @PathVariable("status") Integer status);
+            @Parameter(description = "用户ID") @PathVariable("id") Long id,
+            @Parameter(description = "状态(1:正常,0:禁用)") @PathVariable("status") Integer status);
 
     /**
      * 重置密码
@@ -82,4 +82,5 @@ public interface UserFeignClient {
     @PutMapping("/info/update")
     @Operation(summary = "更新用户基本信息")
     CommonResult<Boolean> updateUserInfo(@RequestBody @Valid UserUpdateDTO userUpdateDTO);
-} 
+}
+

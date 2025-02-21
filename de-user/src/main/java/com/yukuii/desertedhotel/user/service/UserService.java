@@ -1,8 +1,8 @@
 package com.yukuii.desertedhotel.user.service;
 
-import com.yukuii.desertedhotel.user.dto.PasswordUpdateDTO;
-import com.yukuii.desertedhotel.user.dto.UserRegisterDTO;
-import com.yukuii.desertedhotel.user.dto.UserUpdateDTO;
+import com.yukuii.desertedhotel.api.user.dto.PasswordUpdateDTO;
+import com.yukuii.desertedhotel.api.user.dto.UserRegisterDTO;
+import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
 import com.yukuii.desertedhotel.user.model.User;
 
 public interface UserService {
