@@ -14,7 +14,7 @@ import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
 import com.yukuii.desertedhotel.api.user.model.UserDTO;
 import com.yukuii.desertedhotel.api.user.userclient.UserFeignClient;
 import com.yukuii.desertedhotel.common.pojo.CommonResult;
-import com.yukuii.desertedhotel.user.model.User;
+import com.yukuii.desertedhotel.user.model.entity.User;
 import com.yukuii.desertedhotel.user.service.UserService;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -58,30 +58,6 @@ public class UserController implements UserFeignClient {
         UserDTO userDTO = new UserDTO();
         BeanUtil.copyProperties(user, userDTO);
         return CommonResult.success(userDTO);
-    }
-
-    @Override
-    @Operation(summary = "检查用户名是否存在")
-    @GetMapping("/check/username/{username}")
-    public CommonResult<Boolean> checkUsernameExists(@PathVariable("username") String username) {
-        boolean exists = userService.checkUsernameExists(username);
-        return CommonResult.success(exists);
-    }
-
-    @Override
-    @Operation(summary = "检查手机号是否存在")
-    @GetMapping("/check/mobile/{mobile}")
-    public CommonResult<Boolean> checkMobileExists(@PathVariable("mobile") String mobile) {
-        boolean exists = userService.checkMobileExists(mobile);
-        return CommonResult.success(exists);
-    }
-
-    @Override
-    @Operation(summary = "检查邮箱是否存在")
-    @GetMapping("/check/email/{email}")
-    public CommonResult<Boolean> checkEmailExists(@PathVariable("email") String email) {
-        boolean exists = userService.checkEmailExists(email);
-        return CommonResult.success(exists);
     }
 
     @Override

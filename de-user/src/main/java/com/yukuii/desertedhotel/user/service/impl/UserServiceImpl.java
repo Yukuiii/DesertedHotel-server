@@ -14,7 +14,7 @@ import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
 import com.yukuii.desertedhotel.common.exception.BizException;
 //import com.yukuii.desertedhotel.common.utils.email.EmailUtil;
 import com.yukuii.desertedhotel.user.mapper.UserMapper;
-import com.yukuii.desertedhotel.user.model.User;
+import com.yukuii.desertedhotel.user.model.entity.User;
 import com.yukuii.desertedhotel.user.service.UserService;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -79,21 +79,18 @@ public class UserServiceImpl implements UserService {
             return user;
         }
     
-        @Override
         // 判断用户名是否存在
-        public boolean checkUsernameExists(String username) {
+        private boolean checkUsernameExists(String username) {
             return this.userMapper.exists(new LambdaQueryWrapper<User>()
                     .eq(User::getUsername, username));
         }
     
-        @Override
-        public boolean checkMobileExists(String mobile) {
+        private boolean checkMobileExists(String mobile) {
             return this.userMapper.exists(new LambdaQueryWrapper<User>()
                     .eq(User::getMobile, mobile));
         }
     
-        @Override
-        public boolean checkEmailExists(String email) {
+        private boolean checkEmailExists(String email) {
             return this.userMapper.exists(new LambdaQueryWrapper<User>()
                     .eq(User::getEmail, email));
         }

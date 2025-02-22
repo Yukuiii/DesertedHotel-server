@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>de-user</artifactId>
+    <artifactId>de-room</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
@@ -40,4 +40,4 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
     </dependencies>
-</project> 
+</project>

@@ -3,7 +3,7 @@ package com.yukuii.desertedhotel.user.service;
 import com.yukuii.desertedhotel.api.user.dto.PasswordUpdateDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserRegisterDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
-import com.yukuii.desertedhotel.user.model.User;
+import com.yukuii.desertedhotel.user.model.entity.User;
 
 public interface UserService {
     /**
@@ -17,21 +17,6 @@ public interface UserService {
      * 根据用户名获取用户信息
      */
     User getUserByUsername(String username);
-
-    /**
-     * 检查用户名是否存在
-     */
-    boolean checkUsernameExists(String username);
-
-    /**
-     * 检查手机号是否存在
-     */
-    boolean checkMobileExists(String mobile);
-
-    /**
-     * 检查邮箱是否存在
-     */
-    boolean checkEmailExists(String email);
 
     /**
      * 根据用户ID获取用户信息

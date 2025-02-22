@@ -31,28 +31,6 @@ public interface UserFeignClient {
     @GetMapping("/info/id/{id}")
     @Operation(summary = "根据用户ID获取用户信息")
     CommonResult<UserDTO> getUserById(@Parameter(description = "用户ID") @PathVariable("id") Long id);
-
-    /**
-     * 检查用户名是否存在
-     */
-    @GetMapping("/check/username/{username}")
-    @Operation(summary = "检查用户名是否存在")
-    CommonResult<Boolean> checkUsernameExists(@Parameter(description = "用户名") @PathVariable("username") String username);
-
-    /**
-     * 检查手机号是否存在
-     */
-    @GetMapping("/check/mobile/{mobile}")
-    @Operation(summary = "检查手机号是否存在")
-    CommonResult<Boolean> checkMobileExists(@Parameter(description = "手机号") @PathVariable("mobile") String mobile);
-
-    /**
-     * 检查邮箱是否存在
-     */
-    @GetMapping("/check/email/{email}")
-    @Operation(summary = "检查邮箱是否存在")
-    CommonResult<Boolean> checkEmailExists(@Parameter(description = "邮箱") @PathVariable("email") String email);
-
     /**
      * 更新用户状态
      */
