@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
 @Configuration
@@ -24,10 +25,24 @@ public class RedisConfig {
         template.setHashKeySerializer(new StringRedisSerializer());
 
         // 使用自定义的Hutool JSON序列化器处理value和hashValue
-        RedisSerializer<Object> jsonSerializer = new RedisSerializer<Object>() {
+        RedisSerializer<Object> jsonSerializer = createHutoolSerializer();
+
+        template.setValueSerializer(jsonSerializer);
+        template.setHashValueSerializer(jsonSerializer);
+
+        template.afterPropertiesSet();
+        return template;
+    }
+
+    private RedisSerializer<Object> createHutoolSerializer() {
+        return new RedisSerializer<Object>() {
             @Override
             public byte[] serialize(Object object) {
                 if (object == null) return new byte[0];
+                // 处理JSONObject的特殊序列化
+                if (object instanceof JSONObject) {
+                    return object.toString().getBytes(StandardCharsets.UTF_8);
+                }
                 return JSONUtil.toJsonStr(object).getBytes(StandardCharsets.UTF_8);
             }
 
@@ -38,11 +53,5 @@ public class RedisConfig {
                 return JSONUtil.parseObj(jsonStr);
             }
         };
-
-        template.setValueSerializer(jsonSerializer);
-        template.setHashValueSerializer(jsonSerializer);
-
-        template.afterPropertiesSet();
-        return template;
     }
 } 

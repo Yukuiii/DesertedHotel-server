@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Component;
 
+import cn.hutool.json.JSONObject;
 
 /**
  * Redis工具类
@@ -63,6 +64,22 @@ public class RedisUtil {
         } else {
             set(key, value);
         }
+    }
+
+    /**
+     * 获取并自动转换类型的对象
+     * @param key Redis键
+     * @param clazz 目标类型Class对象
+     * @return 转换后的对象实例
+     * @param <T> 目标类型
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getObject(String key, Class<T> clazz) {
+        Object value = get(key);
+        if (value instanceof JSONObject) {
+            return ((JSONObject) value).toBean(clazz);
+        }
+        return (T) value;
     }
 
     // --------------------------- Hash 操作 ---------------------------
