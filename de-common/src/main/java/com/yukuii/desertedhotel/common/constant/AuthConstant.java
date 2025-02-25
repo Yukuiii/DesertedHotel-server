@@ -1,7 +1,7 @@
 package com.yukuii.desertedhotel.common.constant;
 
 /**
- * 认证相关常量
+ * 认证Session相关常量
  * 
  * @author yukuii
  * @since 1.0.0
