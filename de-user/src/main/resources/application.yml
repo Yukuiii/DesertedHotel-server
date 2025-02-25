@@ -37,3 +37,9 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+  helper-dialect: mysql   # 数据库方言
+  reasonable: true        # 分页合理化（pageNum<=0时自动设为1）
+  support-methods-arguments: true # 支持接口参数直接传递
+  params: count=countSql  # 统计查询配置 

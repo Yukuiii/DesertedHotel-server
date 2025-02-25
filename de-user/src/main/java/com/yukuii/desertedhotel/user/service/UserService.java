@@ -1,5 +1,6 @@
 package com.yukuii.desertedhotel.user.service;
 
+import com.github.pagehelper.PageInfo;
 import com.yukuii.desertedhotel.api.user.dto.PasswordUpdateDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserRegisterDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
@@ -45,8 +46,9 @@ public interface UserService {
      */
     boolean updateUserInfo(UserUpdateDTO userUpdateDTO);
 
+
     /**
-     * 记录登录信息
+     * 分页查询所有用户
      */
-    void recordLoginInfo(Long userId, String ip);
+    PageInfo<User> getAllUsers(Integer pageNum, Integer pageSize);
 } 

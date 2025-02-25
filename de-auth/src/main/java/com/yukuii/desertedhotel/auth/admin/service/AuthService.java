@@ -1,6 +1,6 @@
 package com.yukuii.desertedhotel.auth.admin.service;
 
-import com.yukuii.desertedhotel.auth.admin.dto.LoginDTO;
+import com.yukuii.desertedhotel.auth.admin.model.dto.LoginDTO;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 

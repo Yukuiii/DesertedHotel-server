@@ -11,8 +11,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yukuii.desertedhotel.auth.admin.mapper.LoginLogMapper;
 import com.yukuii.desertedhotel.auth.admin.mapper.LogoutLogMapper;
-import com.yukuii.desertedhotel.auth.admin.model.LoginLog;
-import com.yukuii.desertedhotel.auth.admin.model.LogoutLog;
+import com.yukuii.desertedhotel.auth.admin.model.entity.LoginLog;
+import com.yukuii.desertedhotel.auth.admin.model.entity.LogoutLog;
 import com.yukuii.desertedhotel.auth.admin.service.LogService;
 import com.yukuii.desertedhotel.auth.admin.utils.LoginInfoUtil;
 

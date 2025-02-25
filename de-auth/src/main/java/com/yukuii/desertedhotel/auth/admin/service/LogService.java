@@ -1,7 +1,7 @@
 package com.yukuii.desertedhotel.auth.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yukuii.desertedhotel.auth.admin.model.LoginLog;
+import com.yukuii.desertedhotel.auth.admin.model.entity.LoginLog;
 
 public interface LogService extends IService<LoginLog> {
     

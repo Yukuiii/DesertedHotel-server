@@ -1,6 +1,5 @@
 package com.yukuii.desertedhotel.user.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yukuii.desertedhotel.api.user.dto.PasswordUpdateDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserRegisterDTO;
 import com.yukuii.desertedhotel.api.user.dto.UserUpdateDTO;
@@ -183,11 +184,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void recordLoginInfo(Long userId, String ip) {
-        User user = this.getUserById(userId);
-        user.setLastLoginIp(ip);
-        user.setLastLoginTime(LocalDateTime.now());
-        user.setLoginFailCount(0); // 登录成功，重置失败次数
-        this.userMapper.updateById(user);
+    public PageInfo<User> getAllUsers(Integer pageNum, Integer pageSize) {
+        return PageHelper.startPage(pageNum, pageSize)
+                        .doSelectPageInfo(() -> userMapper.selectList(null));
     }
 } 

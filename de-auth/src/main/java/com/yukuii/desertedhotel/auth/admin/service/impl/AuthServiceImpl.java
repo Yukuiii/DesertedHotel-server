@@ -4,9 +4,9 @@ package com.yukuii.desertedhotel.auth.admin.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yukuii.desertedhotel.auth.admin.dto.LoginDTO;
 import com.yukuii.desertedhotel.auth.admin.mapper.AuthAdminMapper;
-import com.yukuii.desertedhotel.auth.admin.model.Admin;
+import com.yukuii.desertedhotel.auth.admin.model.dto.LoginDTO;
+import com.yukuii.desertedhotel.auth.admin.model.entity.Admin;
 import com.yukuii.desertedhotel.auth.admin.service.AuthService;
 import com.yukuii.desertedhotel.common.constant.AuthConstant;
 import com.yukuii.desertedhotel.common.exception.BizException;
@@ -15,6 +15,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
+import com.yukuii.desertedhotel.auth.admin.utils.CaptchaUtils;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -22,12 +23,23 @@ import lombok.AllArgsConstructor;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthAdminMapper authAdminMapper;
-
+    private final CaptchaUtils captchaUtils;
     @Override
     public SaTokenInfo adminLogin(LoginDTO loginDTO) {
+
+        if(){
+            
+        }
+
         // 参数校验
         if (StrUtil.isEmpty(loginDTO.getUsername()) || StrUtil.isEmpty(loginDTO.getPassword())) {
             throw new BizException("用户名或密码不能为空");
+        }
+
+        if(loginDTO.getCaptchaId() != null && loginDTO.getCaptchaCode() != null){
+            if(!captchaUtils.verifyCaptcha(loginDTO.getCaptchaId(), loginDTO.getCaptchaCode())){
+                throw new BizException("验证码不正确");
+            }
         }
 
         // 获取管理员信息
@@ -53,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
             // 更新失败次数
             admin.setLoginFailCount(admin.getLoginFailCount() + 1);
             authAdminMapper.updateById(admin);
-            throw new BizException("密码不正确");
+            throw new BizException("账号或密码不正确");
         }
 
         // 重置登录失败次数
@@ -66,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
         // 将管理员信息存储到会话中
         StpUtil.getSession().set(AuthConstant.STP_ADMIN_INFO, admin);
         
-        return StpUtil.getTokenInfo();
+        return StpUtil.getTokenInfo();  
     }
 
 
@@ -78,8 +90,8 @@ public class AuthServiceImpl implements AuthService {
         }
         
         // 获取当前登录用户ID
-        Long loginId = StpUtil.getLoginIdAsLong();
-        
+        Integer loginId = StpUtil.getLoginIdAsInt();
+    
         // 清除用户的登录信息
         StpUtil.logout(loginId);
     }

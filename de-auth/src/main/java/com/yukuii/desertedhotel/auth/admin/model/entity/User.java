@@ -1,4 +1,4 @@
-package com.yukuii.desertedhotel.auth.admin.model;
+package com.yukuii.desertedhotel.auth.admin.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
