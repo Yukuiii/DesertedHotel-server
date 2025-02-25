@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import com.yukuii.desertedhotel.auth.admin.dto.LoginDTO;
 import com.yukuii.desertedhotel.common.pojo.CommonResult;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 
+import com.yukuii.desertedhotel.auth.admin.model.dto.LoginDTO;
 import com.yukuii.desertedhotel.auth.admin.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,10 +31,6 @@ public class AdminAuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/")
-    public CommonResult<String> test() {
-        return CommonResult.success("请求成功");
-    }
 
     @Operation(summary = "认证授权接口,返回token", description = "用户登录认证接口,验证用户名和密码,成功后返回JWT token")
     @PostMapping("/login")
