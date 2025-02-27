@@ -1,19 +1,23 @@
 package com.yukuii.deroom.model.entity;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 @Data
 @TableName("room")
-@Schema(description = "房间实体")
+@Schema(description = "房间基本信息实体")
 public class Room implements Serializable {
     
     @Serial
@@ -26,7 +30,7 @@ public class Room implements Serializable {
     @Schema(description = "房间号")
     private String roomNumber;
 
-    @Schema(description = "房间类型ID")
+    @Schema(description = "房型ID")
     private Long roomTypeId;
 
     @Schema(description = "房间状态(0:空闲 1:已预订 2:已入住 3:维护中)")
@@ -35,29 +39,8 @@ public class Room implements Serializable {
     @Schema(description = "楼层")
     private Integer floor;
 
-    @Schema(description = "房间价格")
-    private BigDecimal price;
-
-    @Schema(description = "是否有窗(0:无 1:有)")
-    private Integer hasWindow;
-
-    @Schema(description = "床型(1:单床 2:双床 3:大床)")
-    private Integer bedType;
-
-    @Schema(description = "可住人数")
-    private Integer maxGuests;
-
-    @Schema(description = "房间面积(平方米)")
-    private Integer area;
-
-    @Schema(description = "房间设施")
-    private String facilities;
-
     @Schema(description = "房间描述")
     private String description;
-
-    @Schema(description = "房间图片")
-    private String images;
 
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

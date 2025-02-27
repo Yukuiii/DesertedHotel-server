@@ -79,12 +79,6 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
             log.error("服务内部错误" + message);
         }
 
-        if (error instanceof BizException bizException) {
-            errorMessage = bizException.getMessage();
-            code = bizException.getCode();
-            log.error("业务异常" + errorMessage);
-        }
-
         if (error instanceof ResponseStatusException responseStatusException) {
             log.error("请求返回状态错误");
 

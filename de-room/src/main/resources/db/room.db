@@ -1,0 +1,68 @@
+-- 创建房间表
+CREATE TABLE `room` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '房间ID',
+    `room_number` varchar(32) NOT NULL COMMENT '房间号',
+    `room_type_id` bigint(20) NOT NULL COMMENT '房型ID',
+    `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '房间状态(0:空闲 1:已预订 2:已入住 3:维护中)',
+    `floor` int(11) NOT NULL COMMENT '楼层',
+    `description` varchar(500) DEFAULT NULL COMMENT '房间描述',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_room_number` (`room_number`),
+    KEY `idx_room_type_id` (`room_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='房间信息表';
+
+-- 创建房型表
+CREATE TABLE `room_type` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '房型ID',
+    `name` varchar(32) NOT NULL COMMENT '房型名称',
+    `price` decimal(10,2) NOT NULL COMMENT '房间价格',
+    `has_window` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有窗(0:无 1:有)',
+    `bed_type` tinyint(4) NOT NULL COMMENT '床型(1:单床 2:双床 3:大床)',
+    `max_guests` int(11) NOT NULL COMMENT '可住人数',
+    `area` int(11) NOT NULL COMMENT '房间面积(平方米)',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='房型信息表';
+
+-- 创建设施表
+CREATE TABLE `facility` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '设施ID',
+    `name` varchar(32) NOT NULL COMMENT '设施名称',
+    `icon` varchar(255) DEFAULT NULL COMMENT '设施图标',
+    `description` varchar(500) DEFAULT NULL COMMENT '设施描述',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='设施信息表';
+
+-- 创建房间设施关联表
+CREATE TABLE `room_facility` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `room_id` bigint(20) NOT NULL COMMENT '房间ID',
+    `facility_id` bigint(20) NOT NULL COMMENT '设施ID',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_room_facility` (`room_id`,`facility_id`),
+    KEY `idx_facility_id` (`facility_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='房间设施关联表';
+
+-- 创建房间图片表
+CREATE TABLE `room_image` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '图片ID',
+    `room_id` bigint(20) NOT NULL COMMENT '房间ID',
+    `url` varchar(255) NOT NULL COMMENT '图片URL',
+    `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+    `is_main` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否主图(0:否 1:是)',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    KEY `idx_room_id` (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='房间图片表';

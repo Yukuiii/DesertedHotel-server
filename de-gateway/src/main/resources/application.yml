@@ -1,9 +1,15 @@
 # 服务器配置
 server:
   port: 8080  # 网关服务端口号
+  error:
+    whitelabel:
+      enabled: false
 
 # Spring相关配置
 spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
   application:
     name: de-gateway  # 服务名称
   cloud:
@@ -20,13 +26,19 @@ spring:
         - id: auth_route  # 路由ID，保持唯一
           uri: lb://de-auth  # 目标服务地址，lb表示使用负载均衡策略访问服务，de-auth是目标服务名
           predicates:  # 断言（判断条件）
-            - Path=/auth/**  # 匹配请求路径，/auth/**表示以/auth开头的所有请求 
+            - Path=/de-auth/**  # 匹配请求路径，/auth/**表示以/auth开头的所有请求 
           filters:  # 过滤器
             - StripPrefix=1  # 去除请求路径的第一级，如/auth/login -> /login
         - id: user_route
           uri: lb://de-user
           predicates:
-            - Path=/user/**
+            - Path=/de-user/**
+          filters:
+            - StripPrefix=1
+        - id: admin_route
+          uri: lb://de-admin
+          predicates:
+            - Path=/de-admin/**
           filters:
             - StripPrefix=1
   # Redis配置

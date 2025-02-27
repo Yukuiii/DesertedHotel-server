@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.3</version>
+        <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>top.yukuii</groupId>
@@ -19,6 +19,7 @@
         <module>de-user</module>
         <module>de-room</module>
         <module>de-api</module>
+        <module>de-admin</module>
     </modules>
     <name>DesertedHotel-server</name>
     <description>智慧无人酒店服务端</description>
@@ -27,8 +28,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.4.0</spring-boot.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <mysql-connector.version>8.0.29</mysql-connector.version>
         <knife4j.version>4.5.0</knife4j.version>
