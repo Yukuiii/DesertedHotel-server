@@ -29,13 +29,14 @@ public class LogoutLog implements Serializable {
      */
     @TableId(type = IdType.ASSIGN_ID)
     @Schema(description = "日志ID")
-    private String id;
+    private Long id;
 
     /**
      * 用户ID
      */
     @Schema(description = "用户ID")
-    private String userId;
+    private Long userId;
+
 
     /**
      * 用户名
@@ -43,17 +44,19 @@ public class LogoutLog implements Serializable {
     @Schema(description = "用户名")
     private String username;
 
+
+    /**
+     * 用户类型
+     */
+    @Schema(description = "用户类型")
+    private String userType;
+
     /**
      * 登出IP
      */
     @Schema(description = "登出IP")
     private String logoutIp;
 
-    /**
-     * 登出地点
-     */
-    @Schema(description = "登出地点")
-    private String logoutLocation;
 
     /**
      * 浏览器类型

@@ -15,11 +15,10 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // ================= 核心字段 =================
-    @TableId(value = "id", type = IdType.ASSIGN_UUID) // 主键策略
+    @TableId(value = "id", type = IdType.ASSIGN_ID) // 主键策略
     @Schema(description = "用户ID")
     private String id;
 
-    @TableField(value = "username", condition = SqlCondition.EQUAL)
     @Schema(description = "用户名")
     private String username;
 
@@ -29,10 +28,10 @@ public class User implements Serializable {
 
     // ================= 安全字段 =================
 
-    @TableField(value = "status", fill = FieldFill.INSERT)
     @Schema(description = "账号状态 1:启用 0:禁用 -1:删除")
     private Integer status = 1;
 
+    
     // ================= 自动填充字段 =================
     @TableField(value = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

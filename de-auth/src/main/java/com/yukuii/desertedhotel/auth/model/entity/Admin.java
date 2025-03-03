@@ -21,8 +21,8 @@ public class Admin implements Serializable {
     /**
      * 用户ID
      */
-    @Schema(description = "用户ID")
-    @TableId(type = IdType.AUTO)
+    @Schema(description = "管理员ID")
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
@@ -42,7 +42,8 @@ public class Admin implements Serializable {
      * 账号状态 1:启用 0:禁用 -1:删除
      */
     @Schema(description = "账号状态 1:启用 0:禁用 -1:删除")
-    private Integer status;
+    private Integer status = 1;
+
 
     /**
      * 手机号

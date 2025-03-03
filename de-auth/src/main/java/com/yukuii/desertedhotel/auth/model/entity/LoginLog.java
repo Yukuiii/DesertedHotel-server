@@ -4,6 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,13 +21,14 @@ public class LoginLog implements Serializable {
      * 日志ID
      */
     @Schema(description = "日志ID")
-    private String id;
+    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
 
     /**
      * 用户ID
      */
     @Schema(description = "用户ID")
-    private String userId;
+    private Long userId;
 
     /**
      * 用户名
@@ -34,16 +37,17 @@ public class LoginLog implements Serializable {
     private String username;
 
     /**
+     * 用户类型
+     */
+    @Schema(description = "用户类型")
+    private String userType;
+
+    /**
      * 登录IP
      */
     @Schema(description = "登录IP")
     private String loginIp;
 
-    /**
-     * 登录地点
-     */
-    @Schema(description = "登录地点")
-    private String loginLocation;
 
     /**
      * 浏览器类型
@@ -75,4 +79,11 @@ public class LoginLog implements Serializable {
     @Schema(description = "登录时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime loginTime;
+
+    /**
+     * 创建时间
+     */
+    @Schema(description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 } 

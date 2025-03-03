@@ -1,7 +1,6 @@
 package com.yukuii.desertedhotel.auth.controller;
 
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +10,6 @@ import com.yukuii.desertedhotel.common.pojo.CommonResult;
 
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.yukuii.desertedhotel.common.exception.BizException;
 
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
 import com.yukuii.desertedhotel.auth.service.AuthAdminService;
@@ -34,11 +32,6 @@ public class AdminAuthController {
 
     private final AuthAdminService authAdminService;
 
-    @GetMapping("/test")
-    public CommonResult<String> test() {
-        throw new BizException("测试接口");
-    }
-
 
     @Operation(summary = "认证授权接口,返回token", description = "管理员登录认证接口,验证用户名和密码,成功后返回JWT token")
     @PostMapping("/login")
@@ -47,7 +40,7 @@ public class AdminAuthController {
         return CommonResult.success(saTokenInfo.getTokenValue());
     }
 
-    @Operation(summary = "退出登录接口", description = "管理员退出登录接口，清除token信息")
+    @Operation(summary = "退出登录接口", description = "管理员退出登录接口,清除token信息")
     @PostMapping("/logout")
     public CommonResult<String> logout() {
         authAdminService.logout();
