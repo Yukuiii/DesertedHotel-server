@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class LoginInfoUtil {
+public class LogInfoUtil {
 
     /**
      * 获取客户端IP地址

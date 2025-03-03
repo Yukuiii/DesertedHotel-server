@@ -43,8 +43,6 @@ public class AuthAdminServiceImpl implements AuthAdminService {
             throw new BizException("用户名或密码不能为空");
         }
 
-
-
         // 获取管理员信息
         Admin admin = authAdminMapper.selectOne(new LambdaQueryWrapper<Admin>()
                 .eq(Admin::getUsername, adminLoginDTO.getUsername()));

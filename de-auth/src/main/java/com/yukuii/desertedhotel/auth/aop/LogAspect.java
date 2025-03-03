@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
-import com.yukuii.desertedhotel.auth.model.entity.LoginLog;
+import com.yukuii.desertedhotel.auth.model.entity.AdminLog;
 import com.yukuii.desertedhotel.auth.service.LogService;
 
 import cn.dev33.satoken.stp.SaTokenInfo;

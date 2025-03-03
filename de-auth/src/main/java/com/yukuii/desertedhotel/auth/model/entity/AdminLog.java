@@ -6,13 +6,23 @@ import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
-public class LoginLog implements Serializable {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("auth_admin_log")
+@Schema(description = "管理员日志")
+public class AdminLog implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -36,17 +46,12 @@ public class LoginLog implements Serializable {
     @Schema(description = "用户名")
     private String username;
 
-    /**
-     * 用户类型
-     */
-    @Schema(description = "用户类型")
-    private String userType;
 
     /**
-     * 登录IP
+     * 操作IP
      */
-    @Schema(description = "登录IP")
-    private String loginIp;
+    @Schema(description = "操作IP")
+    private String operatingIp;
 
 
     /**
@@ -62,23 +67,29 @@ public class LoginLog implements Serializable {
     private String operatingSystem;
 
     /**
-     * 登录状态（0失败 1成功）
+     * 日志状态（0失败 1成功）
      */
-    @Schema(description = "登录状态（0失败 1成功）")
-    private Integer loginStatus;
+    @Schema(description = "日志状态（0失败 1成功）")
+    private Integer status;
 
     /**
-     * 登录信息（成功/失败的提示信息）
+     *  日志信息（成功/失败的提示信息）
      */
-    @Schema(description = "登录信息")
-    private String loginMessage;
+    @Schema(description = "日志信息（成功/失败的提示信息）")
+    private String message;
 
     /**
-     * 登录时间
+     * 日志类型（0登录 1登出）
      */
-    @Schema(description = "登录时间")
+    @Schema(description = "日志类型（0登录 1登出）")
+    private Integer type;
+
+    /**
+     * 日志时间
+     */
+    @Schema(description = "日志时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime loginTime;
+    private LocalDateTime logTime;
 
     /**
      * 创建时间
@@ -86,4 +97,11 @@ public class LoginLog implements Serializable {
     @Schema(description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @Schema(description = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 } 

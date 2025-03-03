@@ -18,9 +18,9 @@ import lombok.AllArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("auth_logout_log")
-@Schema(description = "登出日志")
-public class LogoutLog implements Serializable {
+@TableName("auth_user_log")
+@Schema(description = "用户日志")
+public class UserLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -45,17 +45,12 @@ public class LogoutLog implements Serializable {
     private String username;
 
 
-    /**
-     * 用户类型
-     */
-    @Schema(description = "用户类型")
-    private String userType;
 
     /**
-     * 登出IP
+     * 操作IP
      */
-    @Schema(description = "登出IP")
-    private String logoutIp;
+    @Schema(description = "操作IP")
+    private String operatingIp;
 
 
     /**
@@ -71,33 +66,43 @@ public class LogoutLog implements Serializable {
     private String operatingSystem;
 
     /**
-     * 登出状态（0失败 1成功）
+     * 状态（0失败 1成功）
      */
-    @Schema(description = "登出状态（0失败 1成功）")
-    private Integer logoutStatus;
+    @Schema(description = "状态（0失败 1成功）")
+    private Integer status;
 
     /**
-     * 登出信息
+     * 日志信息
      */
-    @Schema(description = "登出信息")
-    private String logoutMessage;
+    @Schema(description = "日志信息")
+    private String message;
 
     /**
-     * 登出时间
+     * 日志类型（0登录 1登出）
      */
-    @Schema(description = "登出时间")
+    @Schema(description = "日志类型（0登录 1登出）")
+    private Integer type;
+
+    /**
+     * 日志时间
+     */
+    @Schema(description = "日志时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime logoutTime;
+    private LocalDateTime logTime;
 
     /**
      * 创建时间
      */
+    @Schema(description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
+    @Schema(description = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+
+    
 } 
