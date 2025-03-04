@@ -26,7 +26,7 @@ public class LogService{
      * 记录管理员日志
      * @param adminLog 管理员日志信息
      */
-    public void recordAdminLoginLog(Long adminId){
+    public void recordAdminLoginLog(String username){
 
 
         try {
@@ -39,7 +39,7 @@ public class LogService{
         HttpServletRequest request = ((ServletRequestAttributes) attributes).getRequest();
 
         AdminLog adminLog = AdminLog.builder()
-            .userId(adminId)
+            .username(username)
             .logTime(LocalDateTime.now())
             .operatingIp(LogInfoUtil.getIpAddr(request))
             .operatingSystem(LogInfoUtil.getOperatingSystem(request))
@@ -50,7 +50,7 @@ public class LogService{
             adminLogMapper.insert(adminLog);
         } catch (Exception e) {
             log.error("记录管理员登录日志失败", e);
-        }
+        } 
 
     }
 
@@ -59,7 +59,7 @@ public class LogService{
      * 记录管理员登出日志
      * @param adminId 管理员ID
      */
-    public void recordAdminLogoutLog(Long adminId){
+    public void recordAdminLogoutLog(String username){
         try {
             RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
             if (attributes == null) {
@@ -70,7 +70,7 @@ public class LogService{
             HttpServletRequest request = ((ServletRequestAttributes) attributes).getRequest();
 
             AdminLog adminLog = AdminLog.builder()
-                .userId(adminId)
+                .username(username)
                 .logTime(LocalDateTime.now())
                 .operatingIp(LogInfoUtil.getIpAddr(request))
                 .operatingSystem(LogInfoUtil.getOperatingSystem(request))
@@ -83,6 +83,35 @@ public class LogService{
             log.error("记录管理员登出日志失败", e);
         }
     }
+
+    /**
+     * 记录异常日志
+     * @param e 异常
+     */
+    public void recordExceptionLog(Exception e, String username){
+        try {
+            RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+            if (attributes == null) {
+                log.error("RequestAttributes为空，无法获取请求信息");
+                return; 
+            }
+
+            HttpServletRequest request = ((ServletRequestAttributes) attributes).getRequest();
+
+            AdminLog adminLog = AdminLog.builder()
+                .username(username)
+                .logTime(LocalDateTime.now())
+                .operatingIp(LogInfoUtil.getIpAddr(request))
+                .operatingSystem(LogInfoUtil.getOperatingSystem(request))
+                .browserType(LogInfoUtil.getBrowserType(request))
+                .message(e.getMessage())
+                .build();
+            
+            adminLogMapper.insert(adminLog);
+        } catch (Exception ex) {
+            log.error("记录异常日志失败", ex);
+        }
+        }
+    }
    
 
-} 

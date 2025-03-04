@@ -5,12 +5,11 @@ import java.time.LocalDateTime;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
-import com.yukuii.desertedhotel.auth.model.entity.AdminLog;
 import com.yukuii.desertedhotel.auth.service.LogService;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
@@ -26,6 +25,30 @@ public class LogAspect {
     private LogService logService;
 
     /**
+     * 发生异常时记录日志
+     * @param joinPoint
+     * @param e
+     */
+    @AfterThrowing(
+        pointcut = "execution(* com.yukuii.desertedhotel.auth.service.impl.AuthAdminServiceImpl.*(..))",
+        throwing = "e"
+    )
+    public void logException(JoinPoint joinPoint, Exception e) {
+        // 获取参数
+        
+        Object[] args = joinPoint.getArgs();
+        if (args != null && args.length > 0) {
+            Object arg = args[0];
+            if (arg instanceof AdminLoginDTO) {
+                AdminLoginDTO loginDTO = (AdminLoginDTO) arg;
+                logService.recordExceptionLog(e, loginDTO.getUsername());
+            }
+        }
+    }
+
+
+
+    /**
      * 管理员登录成功后记录日志
      */
     @AfterReturning(
@@ -37,10 +60,7 @@ public class LogAspect {
             AdminLoginDTO loginDTO = (AdminLoginDTO) joinPoint.getArgs()[0];
             if (result instanceof SaTokenInfo) {
                 // 记录登录日志
-                logService.recordLoginLog(
-                    StpUtil.getLoginIdAsString(),
-                    loginDTO.getUsername()
-                );
+                logService.recordAdminLoginLog(loginDTO.getUsername());
             }
         } catch (Exception e) {
             log.error("记录管理员登录日志失败", e);
@@ -54,13 +74,9 @@ public class LogAspect {
     public void logAdminLogout(JoinPoint joinPoint) {
         try {
             if (StpUtil.isLogin()) {
-                String loginId = StpUtil.getLoginIdAsString();
                 String username = StpUtil.getLoginIdAsString();
                 // 记录登出日志
-                logService.recordLogoutLog(
-                    Long.valueOf(loginId),
-                    username
-                );
+                logService.recordAdminLogoutLog(username);
             }
         } catch (Exception e) {
             log.error("记录管理员登出日志失败", e);

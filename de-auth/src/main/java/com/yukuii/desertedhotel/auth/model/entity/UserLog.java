@@ -31,11 +31,6 @@ public class UserLog implements Serializable {
     @Schema(description = "日志ID")
     private Long id;
 
-    /**
-     * 用户ID
-     */
-    @Schema(description = "用户ID")
-    private Long userId;
 
 
     /**

@@ -34,11 +34,6 @@ public class AdminLog implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
-    /**
-     * 用户ID
-     */
-    @Schema(description = "用户ID")
-    private Long userId;
 
     /**
      * 用户名
