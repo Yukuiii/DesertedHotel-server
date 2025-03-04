@@ -8,14 +8,15 @@ import com.yukuii.desertedhotel.auth.mapper.AuthAdminMapper;
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
 import com.yukuii.desertedhotel.auth.model.entity.Admin;
 import com.yukuii.desertedhotel.auth.service.AuthAdminService;
+import com.yukuii.desertedhotel.auth.utils.CaptchaUtils;
 import com.yukuii.desertedhotel.common.constant.AuthConstant;
-import com.yukuii.desertedhotel.common.exception.BizException;
 import com.yukuii.desertedhotel.common.enums.ResultCode;
+import com.yukuii.desertedhotel.common.exception.BizException;
+
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
-import com.yukuii.desertedhotel.auth.utils.CaptchaUtils;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

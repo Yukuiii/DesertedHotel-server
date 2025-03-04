@@ -1,3 +1,4 @@
+package com.yukuii.desertedhotel.common.utils.email;
 //package com.yukuii.desertedhotel.common.utils.email;
 //
 //import java.util.concurrent.TimeUnit;

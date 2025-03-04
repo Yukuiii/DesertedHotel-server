@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yukuii.desertedhotel.common.pojo.CommonResult;
-
-
 import cn.dev33.satoken.stp.SaTokenInfo;
 
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
 import com.yukuii.desertedhotel.auth.service.AuthAdminService;
+import com.yukuii.desertedhotel.common.pojo.CommonResult;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

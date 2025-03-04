@@ -1,6 +1,6 @@
 package com.yukuii.desertedhotel.common.pojo;
 
-import com.yukuii.desertedhotel.common. enums.ResultCode;
+import com.yukuii.desertedhotel.common.enums.ResultCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

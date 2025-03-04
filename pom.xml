@@ -20,6 +20,7 @@
         <module>de-room</module>
         <module>de-api</module>
         <module>de-admin</module>
+        <module>de-front</module>
     </modules>
     <name>DesertedHotel-server</name>
     <description>智慧无人酒店服务端</description>

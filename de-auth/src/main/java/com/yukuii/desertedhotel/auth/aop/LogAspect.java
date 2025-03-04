@@ -29,7 +29,7 @@ public class LogAspect {
      * @param e
      */
     @AfterThrowing(
-        pointcut = "execution(* com.yukuii.desertedhotel.auth.service.impl.AuthAdminServiceImpl.*(..))",
+        pointcut = "execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.*(..))",
         throwing = "e"
     )
     public void logException(JoinPoint joinPoint, Exception e) {
@@ -51,7 +51,7 @@ public class LogAspect {
      * 管理员登录成功后记录日志
      */
     @AfterReturning(
-        pointcut = "execution(* com.yukuii.desertedhotel.auth.service.impl.AuthAdminServiceImpl.adminLogin(..))",
+        pointcut = "execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.adminLogin(..))",
         returning = "result"
     )
     public void logAdminLogin(JoinPoint joinPoint, Object result) {
@@ -69,7 +69,7 @@ public class LogAspect {
     /**
      * 管理员登出成功后记录日志
      */
-    @AfterReturning("execution(* com.yukuii.desertedhotel.auth.service.impl.AuthAdminServiceImpl.logout(..))")
+    @AfterReturning("execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.logout(..))")
     public void logAdminLogout(JoinPoint joinPoint) {
         try {
             if (StpUtil.isLogin()) {
