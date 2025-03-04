@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.yukuii.desertedhotel.auth.model.dto.AdminLoginDTO;
+import com.yukuii.desertedhotel.auth.model.dto.UserLoginDTO;
 import com.yukuii.desertedhotel.auth.service.LogService;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
@@ -29,7 +30,7 @@ public class LogAspect {
      * @param e
      */
     @AfterThrowing(
-        pointcut = "execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.*(..))",
+        pointcut = "execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.*(..)) || execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthUserServiceImpl.*(..))",
         throwing = "e"
     )
     public void logException(JoinPoint joinPoint, Exception e) {
@@ -40,6 +41,9 @@ public class LogAspect {
             Object arg = args[0];
             if (arg instanceof AdminLoginDTO) {
                 AdminLoginDTO loginDTO = (AdminLoginDTO) arg;
+                logService.recordExceptionLog(e, loginDTO.getUsername());
+            } else if (arg instanceof UserLoginDTO) {
+                UserLoginDTO loginDTO = (UserLoginDTO) arg;
                 logService.recordExceptionLog(e, loginDTO.getUsername());
             }
         }
@@ -69,7 +73,7 @@ public class LogAspect {
     /**
      * 管理员登出成功后记录日志
      */
-    @AfterReturning("execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.logout(..))")
+    @AfterReturning("execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthAdminServiceImpl.adminLogout(..))")
     public void logAdminLogout(JoinPoint joinPoint) {
         try {
             if (StpUtil.isLogin()) {
@@ -81,4 +85,40 @@ public class LogAspect {
             log.error("记录管理员登出日志失败", e);
         }
     }
+
+    /**
+     * 用户登录成功后记录日志
+     */
+    @AfterReturning(
+        pointcut = "execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthUserServiceImpl.userLogin(..))",
+        returning = "result"
+    )
+    public void logUserLogin(JoinPoint joinPoint, Object result) {
+        try {
+            UserLoginDTO loginDTO = (UserLoginDTO) joinPoint.getArgs()[0];
+            if (result instanceof SaTokenInfo) {
+                // 记录登录日志
+                logService.recordUserLoginLog(loginDTO.getUsername());
+            }
+        } catch (Exception e) {
+            log.error("记录用户登录日志失败", e);
+        }
+    }
+
+    /**
+     * 用户登出成功后记录日志
+     */
+    @AfterReturning("execution(* com.yukuii.desertedhotel.gateway.auth.service.impl.AuthUserServiceImpl.userLogout(..))")
+    public void logUserLogout(JoinPoint joinPoint) {
+        try {
+            if (StpUtil.isLogin()) {
+                String username = StpUtil.getLoginIdAsString();
+                // 记录登出日志
+                logService.recordUserLogoutLog(username);
+            }
+        } catch (Exception e) {
+            log.error("记录用户登出日志失败", e);
+        }
+    }
+
 } 

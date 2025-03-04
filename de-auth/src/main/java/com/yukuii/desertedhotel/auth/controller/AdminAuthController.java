@@ -42,7 +42,7 @@ public class AdminAuthController {
     @Operation(summary = "退出登录接口", description = "管理员退出登录接口,清除token信息")
     @PostMapping("/logout")
     public CommonResult<String> logout() {
-        authAdminService.logout();
+        authAdminService.adminLogout();
         return CommonResult.success("退出成功");
     }
 }
